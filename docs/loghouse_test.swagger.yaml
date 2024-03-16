@@ -1,0 +1,83 @@
+swagger: "2.0"
+info:
+  title: api/loghouse_test/loghouse_test.proto
+  version: version not set
+tags:
+  - name: DummyService
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /loghouse_test.DummyService/GetDummy:
+    post:
+      operationId: DummyService_GetDummy
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/loghouse_testGetDummyResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/loghouse_testGetDummyRequest'
+      tags:
+        - DummyService
+definitions:
+  DummyEnum:
+    type: string
+    enum:
+      - UNKNOWN
+      - SOME_VALUE
+    default: UNKNOWN
+  loghouse_testDummy:
+    type: object
+    properties:
+      id:
+        type: string
+        format: int64
+      field:
+        type: string
+      enum:
+        $ref: '#/definitions/DummyEnum'
+  loghouse_testGetDummyRequest:
+    type: object
+    properties:
+      id:
+        type: string
+      someField:
+        type: integer
+        format: int32
+  loghouse_testGetDummyResponse:
+    type: object
+    properties:
+      dummy:
+        type: array
+        items:
+          type: object
+          $ref: '#/definitions/loghouse_testDummy'
+  protobufAny:
+    type: object
+    properties:
+      '@type':
+        type: string
+    additionalProperties: {}
+  rpcStatus:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      details:
+        type: array
+        items:
+          type: object
+          $ref: '#/definitions/protobufAny'
