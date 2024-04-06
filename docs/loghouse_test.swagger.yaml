@@ -30,12 +30,6 @@ paths:
       tags:
         - DummyService
 definitions:
-  DummyEnum:
-    type: string
-    enum:
-      - UNKNOWN
-      - SOME_VALUE
-    default: UNKNOWN
   loghouse_testDummy:
     type: object
     properties:
@@ -44,16 +38,11 @@ definitions:
         format: int64
       field:
         type: string
-      enum:
-        $ref: '#/definitions/DummyEnum'
   loghouse_testGetDummyRequest:
     type: object
     properties:
       id:
         type: string
-      someField:
-        type: integer
-        format: int32
   loghouse_testGetDummyResponse:
     type: object
     properties:

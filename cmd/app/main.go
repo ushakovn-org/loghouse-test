@@ -2,12 +2,40 @@
 package main
 
 import (
+	"log"
+	"main/internal/app/dummy_service"
+
 	"github.com/ushakovn/boiler/pkg/app"
-	"github.com/ushakovn/ushakovn-org/loghouse-test/internal/app/dummy_service"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
+
+	"github.com/ushakovn-org/loghouse/pkg/middlewares"
 )
 
 func main() {
-	a := app.NewApp()
+	conn, err := grpc.Dial("localhost:8082",
+		grpc.WithTransportCredentials(
+			insecure.NewCredentials(),
+		),
+	)
+	if err != nil {
+		log.Fatalf("grpc.Dial: %v", err)
+	}
+	defer func() {
+		if err = conn.Close(); err != nil {
+			log.Fatalf("conn.Close: %v", err)
+		}
+	}()
+
+	interceptor := middlewares.UnaryServerInterceptor(middlewares.NewConfig().WithConn(conn))
+
+	a := app.NewApp(
+		app.WithGrpcServePort(9095),
+		app.WithGrpcHttpProxyPort(9096),
+		app.WithDutyHttpServePort(9097),
+		app.WithGrpcUnaryServerInterceptors(interceptor),
+	)
 	s := dummy_service.NewDummyService()
+
 	a.Run(s)
 }

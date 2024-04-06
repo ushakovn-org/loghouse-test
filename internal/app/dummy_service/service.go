@@ -4,8 +4,8 @@ package dummy_service
 
 import (
 	"github.com/ushakovn/boiler/pkg/app"
-	docs "github.com/ushakovn/ushakovn-org/loghouse-test/docs"
-	desc "github.com/ushakovn/ushakovn-org/loghouse-test/internal/pb/loghouse_test"
+	docs "main/docs"
+	desc "main/internal/pb/loghouse_test"
 )
 
 type DummyService struct {

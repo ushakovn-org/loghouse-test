@@ -59,8 +59,6 @@ func (m *GetDummyRequest) validate(all bool) error {
 
 	// no validation rules for Id
 
-	// no validation rules for SomeField
-
 	if len(errors) > 0 {
 		return GetDummyRequestMultiError(errors)
 	}
@@ -297,8 +295,6 @@ func (m *Dummy) validate(all bool) error {
 	// no validation rules for Id
 
 	// no validation rules for Field
-
-	// no validation rules for Enum
 
 	if len(errors) > 0 {
 		return DummyMultiError(errors)

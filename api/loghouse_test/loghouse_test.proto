@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package loghouse_test;
 
-option go_package = "github.com/ushakovn/ushakovn-org/loghouse-test/internal/pb/loghouse_test;loghouse_test";
+option go_package = "main/internal/pb/loghouse_test;loghouse_test";
 
 // Use proto imports:
 //   Execute:   boiler proto-deps init & boiler proto-deps gen --github-token=<GITHUB_TOKEN>;
@@ -21,7 +21,6 @@ service DummyService {
 
 message GetDummyRequest {
   string id = 1;
-  int32 some_field = 2;
 }
 
 message GetDummyResponse {
@@ -31,10 +30,4 @@ message GetDummyResponse {
 message Dummy {
   int64 id = 1;
   string field = 2;
-
-  enum Enum {
-    UNKNOWN = 0;
-    SOME_VALUE = 1;
-  }
-  Enum enum = 3;
 }

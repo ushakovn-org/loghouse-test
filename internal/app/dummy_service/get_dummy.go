@@ -4,9 +4,9 @@ package dummy_service
 
 import (
 	"context"
-	desc "github.com/ushakovn/ushakovn-org/loghouse-test/internal/pb/loghouse_test"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
+	desc "main/internal/pb/loghouse_test"
 )
 
 // GetDummy implementation stub. Change this.
